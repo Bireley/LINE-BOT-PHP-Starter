@@ -56,6 +56,8 @@ if (!is_null($events['events'])) {
 		$post = json_encode($data);
 		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 		
+		file_put_contents("php://stderr", "Post Data : "  . $post  . "  \n");
+		
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -63,6 +65,9 @@ if (!is_null($events['events'])) {
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		$result = curl_exec($ch);
+		
+		file_put_contents("php://stderr", "Result : "  . $result  . "  \n");
+		
 		curl_close($ch);
 
 		echo $result . "\r\n";
